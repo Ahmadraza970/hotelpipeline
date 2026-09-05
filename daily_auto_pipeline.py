@@ -4,7 +4,7 @@ daily_auto_pipeline.py - Full auto hotel pipeline for Hermes
 Runs: find Pune+Goa -> Serper enrich -> strict MX verify -> push to Google Sheet -> Gmail send (verified only) -> wait
 Called automatically at Windows logon and daily 9am via Task Scheduler, no manual reply needed.
 """
-import csv, json, os, re, time, base64, subprocess, sys
+import csv, json, os, re, time, base64, subprocess, sys, tempfile
 from email.mime.text import MIMEText
 from datetime import datetime
 
@@ -126,16 +126,25 @@ def push_to_sheet():
     rows=list(csv.DictReader(open(CSV, encoding='utf-8')))
     vals=[['Lead ID','Hotel Name','City / Destination','Phone Number','Email Address','Website Status','OTA Commission Loss','Lead Status','Date Discovered','Audit & Pitch Notes']]
     for r in rows:
-        vals.append([r.get('id',''), r.get('hotel_name',''), r.get('city',''), r.get('phone') or 'Not listed', r.get('email') or 'Pending lookup', 'NO WEBSITE (OTA Only)' if not r.get('website') else r.get('website'), '18% - 22% (MakeMyTrip/Goibibo)', r.get('status','identified').upper(), r.get('date_discovered',''), r.get('audit_notes','')])
+        vals.append([r.get('id',''), r.get('hotel_name',''), r.get('city',''), r.get('phone') or 'Not listed', r.get('email') or 'Pending lookup', 'NO WEBSITE (OTA Only)' if not r.get('website') else 'HAS WEBSITE', 'Yes', 'Pending', r.get('date_discovered',''), r.get('audit_notes','')])
     import json as js
-    tmp="C:/Users/AHMAD RAJA/AppData/Local/Temp/sheet_auto.json"
-    open(tmp,'w',encoding='utf-8').write(js.dumps(vals))
     import subprocess as sp
-    res=sp.run([sys.executable, "C:/Users/AHMAD RAJA/AppData/Local/hermes/skills/productivity/google-workspace/scripts/google_api.py", "sheets", "update", SHEET_ID, "Sheet1!A1", "--values", open(tmp,encoding='utf-8').read()], capture_output=True, text=True, timeout=30)
-    if res.returncode==0:
-        log(f"Pushed {len(vals)-1} leads to sheet: {res.stdout[:100]}")
-    else:
-        log(f"Sheet push failed: {res.stderr[:300]}")
+    
+    # Use cross-platform temp file instead of hardcoded Windows path
+    with tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False, encoding='utf-8') as f:
+        tmp = f.name
+        js.dump(vals, f)
+    
+    try:
+        res=sp.run([sys.executable, "C:/Users/AHMAD RAJA/AppData/Local/hermes/skills/productivity/google-workspace/scripts/google_api.py", "sheets", "update", SHEET_ID, "Sheet1!A1", "--values", tmp], capture_output=True, text=True)
+        if res.returncode==0:
+            log(f"Pushed {len(vals)-1} leads to sheet: {res.stdout[:100]}")
+        else:
+            log(f"Sheet push failed: {res.stderr[:300]}")
+    finally:
+        # Clean up temp file
+        if os.path.exists(tmp):
+            os.remove(tmp)
 
 def send_verified():
     log("Step 4: Sending via Gmail API to verified unsent leads (max 20/day)")
@@ -156,7 +165,7 @@ def send_verified():
     log(f"Sending batch {len(batch)}: {[r['id'] for r in batch]}")
     template='''Namaste / Hello Hotel Owner / Manager,
 
-I came across {hotel_name} while looking at popular places to stay in {city}. Your property looks wonderful, but I noticed that guests currently cannot book directly on your own official website and have to rely on third-party OTAs like MakeMyTrip, Goibibo, or Booking.com.
+I came across {hotel_name} while looking at popular places to stay in {city}. Your property looks wonderful, but I noticed that guests currently cannot book directly on your own official website.
 
 Every time a guest books through these OTAs, you lose 18% to 25% in commissions. If your average room is Rs.2,500/night, that is Rs.500+ lost on every single night!
 
