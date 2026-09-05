@@ -1,0 +1,8 @@
+{
+  "gsheet_webhook_url": "",
+  "gsheet_sheet_id": "1wt74LQbaVKT4um2Auv92lJDWF0lKj7_JejnrRBi26cY",
+  "sheet_name": "Hotel Leads",
+  "auto_sync": true,
+  "use_hermes_oauth": true,
+  "fields": ["id", "hotel_name", "city", "phone", "email", "website", "status", "date_discovered", "audit_notes"]
+}

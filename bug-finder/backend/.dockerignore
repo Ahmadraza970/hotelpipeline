@@ -1,0 +1,8 @@
+# Don't ship local test/probe scripts or the virtualenv/data.
+_smoke_test.py
+_fix_probe.py
+._*
+*.py[cod]
+data/
+.env
+__pycache__/

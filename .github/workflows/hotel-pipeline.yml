@@ -1,0 +1,77 @@
+name: hotel-pipeline-24-7
+
+on:
+  schedule:
+    - cron: '30 3 * * *'  # 09:00 IST = 03:30 UTC
+  workflow_dispatch:      # manual Run button in GitHub UI
+
+# Keep scheduled workflows from being disabled after 60 days of inactivity
+permissions:
+  contents: write
+
+jobs:
+  daily-pipeline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install deps
+        run: |
+          pip install --upgrade pip
+          pip install google-api-python-client google-auth google-auth-oauthlib openpyxl requests
+
+      - name: Restore Google Token
+        run: |
+          echo '${{ secrets.GOOGLE_TOKEN_JSON }}' > /tmp/google_token.json
+          echo "GOOGLE_TOKEN=/tmp/google_token.json" >> $GITHUB_ENV
+          echo "Token restored $(wc -c < /tmp/google_token.json) bytes"
+
+      - name: Run Daily Auto Pipeline
+        env:
+          SERPER_KEY: ${{ secrets.SERPER_KEY }}
+          SHEET_ID: ${{ secrets.SHEET_ID }}
+          GOOGLE_TOKEN: /tmp/google_token.json
+          GITHUB_ACTIONS: "true"
+          HERMES_DIR: ${{ github.workspace }}
+        run: |
+          echo "=== Pre-check ==="
+          ls -lh indian_hotel_leads.csv sent_log_goa_pune.json || true
+          echo "Rows before: $(wc -l < indian_hotel_leads.csv)"
+          echo "=== Running pipeline ==="
+          python daily_auto_pipeline.py
+          echo "=== Post-check ==="
+          echo "Rows after: $(wc -l < indian_hotel_leads.csv)"
+          cat sent_log_goa_pune.json | python -c "import json; d=json.load(open('sent_log_goa_pune.json')); print(f'Total sent: {len(d[\"sent\"])}')"
+
+      - name: Commit updated leads back to repo
+        run: |
+          git config user.name "hermes-bot"
+          git config user.email "hermes-bot@github.actions"
+          git add indian_hotel_leads.csv indian_hotel_leads.xlsx sent_log_goa_pune.json indian_hotel_leads_for_gsheet.csv || true
+          git diff --staged --quiet && echo "No changes to commit" && exit 0
+          git commit -m "auto: daily pipeline $(date -u +%Y-%m-%d) - $(wc -l < indian_hotel_leads.csv) leads, $(python -c "import json;print(len(json.load(open('sent_log_goa_pune.json'))['sent']))") sent"
+          git push
+
+  # Keep-alive: prevents GitHub from auto-disabling cron after 60 days of no commits
+  keep-alive:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    needs: daily-pipeline
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          git config user.name "hermes-bot"
+          git config user.email "hermes-bot@github.actions"
+          date > .github/.keepalive
+          git add .github/.keepalive
+          git diff --staged --quiet && exit 0
+          git commit -m "keepalive: $(date -u +%Y-%m-%d)" && git push || true

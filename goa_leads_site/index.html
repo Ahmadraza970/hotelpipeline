@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hotel Lead Gen & Deal Closer Agent</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0e17;
+  --panel: #111827;
+  --panel-alt: #162032;
+  --border: #1f2d42;
+  --border-focus: #3b82f6;
+  --text: #f1f5f9;
+  --text-muted: #94a3b8;
+  --accent: #22c55e;
+  --accent-glow: rgba(34, 197, 94, 0.2);
+  --blue: #3b82f6;
+  --amber: #f59e0b;
+  --purple: #a855f7;
+  --red: #ef4444;
+  --font: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: var(--font); }
+body { background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
+
+header {
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand .logo-icon {
+  width: 38px; height: 38px; background: linear-gradient(135deg, #10b981, #3b82f6);
+  border-radius: 10px; display: flex; align-items: center; justify-content: center;
+  font-size: 20px; box-shadow: 0 4px 12px var(--accent-glow);
+}
+.brand h1 { font-size: 19px; font-weight: 700; letter-spacing: -0.3px; }
+.brand h1 span { color: #38bdf8; }
+.brand p { font-size: 12px; color: var(--text-muted); font-weight: 500; }
+
+.nav-tabs { display: flex; gap: 6px; background: #0c121e; padding: 4px; border-radius: 10px; border: 1px solid var(--border); }
+.nav-tab {
+  padding: 8px 16px; border-radius: 7px; border: 0; background: transparent;
+  color: var(--text-muted); font-size: 13px; font-weight: 600; cursor: pointer;
+  transition: all 0.2s ease; display: flex; align-items: center; gap: 7px;
+}
+.nav-tab:hover { color: var(--text); background: rgba(255,255,255,0.04); }
+.nav-tab.active { background: var(--blue); color: #fff; box-shadow: 0 2px 8px rgba(59, 130, 246, 0.4); }
+
+.stats-bar {
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+  padding: 10px 28px;
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  font-size: 12px;
+}
+.stat-item { display: flex; align-items: center; gap: 6px; color: var(--text-muted); }
+.stat-item b { color: var(--text); font-weight: 700; }
+
+main { flex: 1; padding: 24px 28px; max-width: 1600px; width: 100%; margin: 0 auto; }
+
+.tab-pane { display: none; }
+.tab-pane.active { display: block; animation: fadeIn 0.2s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Controls & Toolbar */
+.toolbar {
+  display: flex; gap: 12px; flex-wrap: wrap; align-items: center;
+  margin-bottom: 18px;
+}
+.search-input {
+  flex: 1; min-width: 240px; padding: 10px 14px;
+  background: var(--panel); border: 1px solid var(--border); border-radius: 8px;
+  color: var(--text); font-size: 14px; outline: none; transition: border-color 0.2s;
+}
+.search-input:focus { border-color: var(--border-focus); }
+.select-filter {
+  padding: 10px 14px; background: var(--panel); border: 1px solid var(--border);
+  border-radius: 8px; color: var(--text); font-size: 14px; outline: none; cursor: pointer;
+}
+.btn {
+  padding: 10px 18px; border-radius: 8px; font-size: 13px; font-weight: 600;
+  cursor: pointer; border: none; display: inline-flex; align-items: center; gap: 8px;
+  transition: all 0.2s; text-decoration: none;
+}
+.btn-primary { background: #2563eb; color: #fff; }
+.btn-primary:hover { background: #1d4ed8; }
+.btn-success { background: #16a34a; color: #fff; }
+.btn-success:hover { background: #15803d; }
+.btn-secondary { background: var(--panel-alt); color: var(--text); border: 1px solid var(--border); }
+.btn-secondary:hover { background: #1f2d42; }
+
+/* Table */
+.table-card {
+  background: var(--panel); border: 1px solid var(--border); border-radius: 12px;
+  overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+.table-container { max-height: 68vh; overflow: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th {
+  background: #0f1522; color: #94a3b8; font-weight: 600; text-align: left;
+  padding: 12px 14px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 10;
+  white-space: nowrap;
+}
+td { padding: 12px 14px; border-bottom: 1px solid #1a2333; vertical-align: middle; }
+tr:hover td { background: rgba(255,255,255,0.02); }
+
+.badge {
+  display: inline-block; padding: 3px 9px; border-radius: 20px; font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-identified { background: rgba(59, 130, 246, 0.18); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); }
+.badge-emailed { background: rgba(245, 158, 11, 0.18); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4); }
+.badge-replied { background: rgba(168, 85, 247, 0.18); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.4); }
+.badge-proposal { background: rgba(14, 165, 233, 0.18); color: #38bdf8; border: 1px solid rgba(14, 165, 233, 0.4); }
+.badge-closed_won { background: rgba(34, 197, 94, 0.18); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.4); }
+
+.no-website-tag {
+  color: #f87171; background: rgba(239, 68, 68, 0.12); padding: 3px 8px; border-radius: 6px;
+  font-size: 11px; font-weight: 600; display: inline-flex; align-items: center; gap: 4px;
+}
+
+/* 2-Column Detail Views */
+.two-col { display: grid; grid-template-columns: 360px 1fr; gap: 20px; }
+@media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } }
+
+.side-panel {
+  background: var(--panel); border: 1px solid var(--border); border-radius: 12px;
+  padding: 18px; display: flex; flex-direction: column; gap: 14px;
+}
+.side-panel h3 { font-size: 15px; font-weight: 700; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+
+.main-panel {
+  background: var(--panel); border: 1px solid var(--border); border-radius: 12px;
+  padding: 22px; display: flex; flex-direction: column; gap: 16px;
+}
+.main-panel h3 { font-size: 17px; font-weight: 700; }
+
+.lead-picker-list {
+  max-height: 480px; overflow-y: auto; display: flex; flex-direction: column; gap: 6px;
+}
+.lead-card-item {
+  padding: 10px 12px; border-radius: 8px; background: #0c131f; border: 1px solid var(--border);
+  cursor: pointer; transition: all 0.15s;
+}
+.lead-card-item:hover { border-color: var(--blue); background: #131c2c; }
+.lead-card-item.selected { border-color: var(--blue); background: #1a273e; }
+.lead-card-item .item-title { font-weight: 600; font-size: 13px; color: var(--text); }
+.lead-card-item .item-sub { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+.editor-box {
+  background: #090d16; border: 1px solid var(--border); border-radius: 10px;
+  padding: 18px; font-family: var(--mono); font-size: 13px; line-height: 1.6;
+  color: #e2e8f0; white-space: pre-wrap; max-height: 520px; overflow-y: auto;
+}
+
+.toast {
+  position: fixed; bottom: 24px; right: 24px; background: #10b981; color: #fff;
+  padding: 12px 20px; border-radius: 8px; font-weight: 600; font-size: 13px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.5); opacity: 0; transform: translateY(10px);
+  transition: all 0.2s; pointer-events: none; z-index: 100;
+}
+.toast.show { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <div class="logo-icon">🏨</div>
+    <div>
+      <h1>Hotel <span>Lead Gen & Deal Closer</span></h1>
+      <p>Zero-Commission Direct Booking & Guest Review Outreach Automation</p>
+    </div>
+  </div>
+
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="switchTab('tab-pipeline')">📋 Pipeline Leads</button>
+    <button class="nav-tab" onclick="switchTab('tab-pitch')">✉️ Cold Email Pitch</button>
+    <button class="nav-tab" onclick="switchTab('tab-closer')">💬 AI Reply & Closer</button>
+    <button class="nav-tab" onclick="switchTab('tab-contract')">📜 Contract Generator</button>
+  </div>
+</header>
+
+<div class="stats-bar" id="statsBar">
+  <div class="stat-item">Total Leads: <b id="statTotal">0</b></div>
+  <div class="stat-item">Identified (No Website): <b id="statIdentified">0</b></div>
+  <div class="stat-item">Emailed: <b id="statEmailed">0</b></div>
+  <div class="stat-item">Replied / Negotiating: <b id="statReplied">0</b></div>
+  <div class="stat-item">Proposal / Contract: <b id="statProposal">0</b></div>
+</div>
+
+<main>
+  <!-- TAB 1: PIPELINE CRM -->
+  <div id="tab-pipeline" class="tab-pane active">
+    <div class="toolbar">
+      <input type="text" id="searchInput" class="search-input" placeholder="🔍 Search hotel name, city, phone, email...">
+      <select id="statusFilter" class="select-filter">
+        <option value="">All Statuses</option>
+        <option value="identified">Identified (No Website / OTA)</option>
+        <option value="emailed">Emailed</option>
+        <option value="replied">Replied</option>
+        <option value="proposal">Proposal</option>
+        <option value="closed_won">Closed Won</option>
+      </select>
+      <select id="cityFilter" class="select-filter">
+        <option value="">All Locations</option>
+      </select>
+      <button class="btn btn-secondary" onclick="exportCSV()">📥 Export CSV</button>
+    </div>
+
+    <div class="table-card">
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Hotel Name</th>
+              <th>Location</th>
+              <th>Status</th>
+              <th>Website Status</th>
+              <th>Phone</th>
+              <th>Email</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="leadsTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 2: COLD PITCH GENERATOR -->
+  <div id="tab-pitch" class="tab-pane">
+    <div class="two-col">
+      <div class="side-panel">
+        <h3>Select Hotel Lead</h3>
+        <input type="text" id="pitchSearch" class="search-input" placeholder="Filter hotels..." oninput="filterLeadCards('pitchList', this.value)">
+        <div class="lead-picker-list" id="pitchList"></div>
+      </div>
+      <div class="main-panel">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <h3 id="pitchHeading">Cold Pitch Email</h3>
+            <p style="font-size:12px; color:var(--text-muted);">Features: Direct Booking Engine (0% commission) + Customer Review Showcase</p>
+          </div>
+          <div style="display:flex; gap:8px;">
+            <button class="btn btn-secondary" onclick="copyText('pitchContent')">📋 Copy Email</button>
+            <a id="pitchMailto" href="#" class="btn btn-primary">✉️ Open in Mail Client</a>
+          </div>
+        </div>
+        <div style="background:#0a0f19; padding:10px 14px; border-radius:8px; border:1px solid var(--border);">
+          <span style="color:#94a3b8; font-size:12px;">Subject:</span>
+          <b id="pitchSubject" style="color:#60a5fa; font-size:13px; margin-left:8px;"></b>
+        </div>
+        <div class="editor-box" id="pitchContent">Select a hotel from the list on the left to preview the tailored outreach email.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 3: AI REPLY CLOSER -->
+  <div id="tab-closer" class="tab-pane">
+    <div class="two-col">
+      <div class="side-panel">
+        <h3>1. Select Lead</h3>
+        <div class="lead-picker-list" id="closerList"></div>
+        <h3 style="margin-top:12px;">2. Client Response Scenario</h3>
+        <select id="replyIntentSelect" class="select-filter" onchange="generateReply()">
+          <option value="price">💰 Scenario A: "How much does it cost?" (ROI & Pricing)</option>
+          <option value="ota_objection">🏨 Scenario B: "We already use Booking.com / Airbnb"</option>
+          <option value="demo_interest">⭐ Scenario C: "Show me a demo / I'm interested"</option>
+          <option value="no_need">🙅 Scenario D: "We don't need a website (phone only)"</option>
+          <option value="contract_ready">✍️ Scenario E: "Ready to proceed / Send contract"</option>
+        </select>
+      </div>
+      <div class="main-panel">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <h3 id="closerHeading">Client Cooperation & Closing Response</h3>
+            <p style="font-size:12px; color:var(--text-muted);">Consultative objection handling, concrete ROI math, and contract closing strategy</p>
+          </div>
+          <div style="display:flex; gap:8px;">
+            <button class="btn btn-secondary" onclick="copyText('closerContent')">📋 Copy Response</button>
+            <button class="btn btn-success" onclick="quickProceedContract()">📜 Generate Contract Now</button>
+          </div>
+        </div>
+        <div style="background:#0a0f19; padding:10px 14px; border-radius:8px; border:1px solid var(--border);">
+          <span style="color:#94a3b8; font-size:12px;">Subject:</span>
+          <b id="closerSubject" style="color:#a855f7; font-size:13px; margin-left:8px;"></b>
+        </div>
+        <div class="editor-box" id="closerContent">Select a hotel and response scenario to view the optimal closing reply.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 4: CONTRACT GENERATOR -->
+  <div id="tab-contract" class="tab-pane">
+    <div class="two-col">
+      <div class="side-panel">
+        <h3>Contract Details</h3>
+        <div class="lead-picker-list" id="contractList"></div>
+        <label style="font-size:12px; color:var(--text-muted); margin-top:8px;">Project Fee (Currency & Amount):</label>
+        <div style="display:flex; gap:8px;">
+          <select id="contractCurrency" class="select-filter" style="width:100px;" onchange="generateContractView()">
+            <option value="INR">INR (₹)</option>
+            <option value="USD">USD ($)</option>
+            <option value="EUR">EUR (€)</option>
+          </select>
+          <input type="number" id="contractAmount" class="search-input" value="28000" oninput="generateContractView()">
+        </div>
+        <button class="btn btn-primary" style="margin-top:10px;" onclick="printContract()">🖨️ Print / Save as PDF</button>
+        <button class="btn btn-secondary" onclick="copyText('contractContent')">📋 Copy Markdown</button>
+      </div>
+      <div class="main-panel">
+        <h3 id="contractHeading">Hotel Website & Direct Booking Development Agreement</h3>
+        <div class="editor-box" id="contractContent" style="max-height:650px;">Select a hotel to draft the formal agreement.</div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div class="toast" id="toast">Copied to clipboard!</div>
+
+<script>
+let leads = [];
+let selectedLead = null;
+
+// Fetch leads from leads.json
+fetch('leads.json')
+  .then(r => r.json())
+  .then(data => {
+    leads = data;
+    init();
+  })
+  .catch(err => {
+    console.error("Error loading leads:", err);
+  });
+
+function init() {
+  updateStats();
+  populateCityFilter();
+  renderTable();
+  populateSideLists();
+  if (leads.length > 0) {
+    selectLead(leads[0].id);
+  }
+}
+
+function updateStats() {
+  document.getElementById('statTotal').textContent = leads.length;
+  document.getElementById('statIdentified').textContent = leads.filter(l => l.outreach_status === 'identified').length;
+  document.getElementById('statEmailed').textContent = leads.filter(l => l.outreach_status === 'emailed').length;
+  document.getElementById('statReplied').textContent = leads.filter(l => l.outreach_status === 'replied').length;
+  document.getElementById('statProposal').textContent = leads.filter(l => l.outreach_status === 'proposal').length;
+}
+
+function populateCityFilter() {
+  let cities = Array.from(new Set(leads.map(l => l.city).filter(Boolean))).sort();
+  let sel = document.getElementById('cityFilter');
+  cities.forEach(c => {
+    let opt = document.createElement('option');
+    opt.value = c; opt.textContent = c;
+    sel.appendChild(opt);
+  });
+}
+
+function renderTable() {
+  let q = (document.getElementById('searchInput').value || '').toLowerCase();
+  let sf = document.getElementById('statusFilter').value;
+  let cf = document.getElementById('cityFilter').value;
+
+  let filtered = leads.filter(l => {
+    if (sf && l.outreach_status !== sf) return false;
+    if (cf && l.city !== cf) return false;
+    if (q) {
+      let matchName = (l.hotel_name || '').toLowerCase().includes(q);
+      let matchCity = (l.city || '').toLowerCase().includes(q);
+      let matchPhone = (l.phone || '').toLowerCase().includes(q);
+      let matchEmail = (l.email || '').toLowerCase().includes(q);
+      if (!matchName && !matchCity && !matchPhone && !matchEmail) return false;
+    }
+    return true;
+  });
+
+  let tbody = document.getElementById('leadsTableBody');
+  tbody.innerHTML = filtered.map((l, idx) => {
+    let webStatus = !l.website ? `<span class="no-website-tag">❌ No Website</span>` : `<a href="${l.website}" target="_blank" style="color:#60a5fa; text-decoration:none;">${l.website.replace('https://','').replace('http://','').slice(0,25)}</a>`;
+    return `<tr>
+      <td>${idx + 1}</td>
+      <td><b>${escapeHtml(l.hotel_name || '')}</b></td>
+      <td>${escapeHtml(l.city || '')}</td>
+      <td><span class="badge badge-${l.outreach_status}">${l.outreach_status}</span></td>
+      <td>${webStatus}</td>
+      <td>${l.phone || '<span style="color:#64748b">—</span>'}</td>
+      <td>${l.email || '<span style="color:#64748b">—</span>'}</td>
+      <td>
+        <button class="btn btn-secondary" style="padding:4px 8px; font-size:11px;" onclick="openPitchFor('${l.id}')">Pitch</button>
+        <button class="btn btn-secondary" style="padding:4px 8px; font-size:11px;" onclick="openCloserFor('${l.id}')">Reply</button>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+document.getElementById('searchInput').addEventListener('input', renderTable);
+document.getElementById('statusFilter').addEventListener('change', renderTable);
+document.getElementById('cityFilter').addEventListener('change', renderTable);
+
+function switchTab(tabId) {
+  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+
+function populateSideLists() {
+  ['pitchList', 'closerList', 'contractList'].forEach(listId => {
+    let el = document.getElementById(listId);
+    el.innerHTML = leads.map(l => `
+      <div class="lead-card-item ${selectedLead && selectedLead.id === l.id ? 'selected' : ''}" id="${listId}-${l.id}" onclick="selectLead('${l.id}')">
+        <div class="item-title">${escapeHtml(l.hotel_name)}</div>
+        <div class="item-sub">${escapeHtml(l.city)} · <span style="color:#60a5fa">${l.outreach_status}</span></div>
+      </div>
+    `).join('');
+  });
+}
+
+function selectLead(leadId) {
+  selectedLead = leads.find(l => l.id === leadId) || leads[0];
+  document.querySelectorAll('.lead-card-item').forEach(el => el.classList.remove('selected'));
+  ['pitchList', 'closerList', 'contractList'].forEach(listId => {
+    let card = document.getElementById(`${listId}-${leadId}`);
+    if (card) card.classList.add('selected');
+  });
+
+  generatePitch();
+  generateReply();
+  generateContractView();
+}
+
+function generatePitch() {
+  if (!selectedLead) return;
+  let name = selectedLead.hotel_name || 'your hotel';
+  let city = selectedLead.city || 'your area';
+  let contact = selectedLead.contact_name || 'Hotel Manager / Owner';
+
+  let subject = `Direct booking & guest review system for ${name} (stop losing ~18% OTA fees)`;
+  let body = `Hi ${contact},
+
+I came across **${name}** while researching top places to stay in ${city}. Your property looks fantastic, but I noticed guests currently don't have a direct website to check room availability and book directly without paying high fees to OTAs like Booking.com or MakeMyTrip.
+
+Every time a guest books through an OTA, you are paying 18% to 25% in commissions. On average reservations, that is thousands lost each month that should stay in your pocket.
+
+We build modern, high-converting websites specifically tailored for hotels and guesthouses like ${name}, equipped with two game-changing features:
+
+  🏨 1. Zero-Commission Direct Booking Engine:
+     - Accept instant reservations and secure card payments directly on your website.
+     - Keep 100% of your booking revenue (zero middleman fees).
+     - Automated calendar sync with Airbnb & Booking.com to prevent double-bookings.
+
+  ⭐ 2. Verified Customer Reviews & Reputation Showcase:
+     - Highlight your best 5-star guest reviews and ratings front-and-center.
+     - Gives prospective travelers the trust and social proof they need to book immediately on your site.
+     - Automated review collection to encourage happy guests to leave feedback.
+
+  📱 3. Mobile-First & Ultra-Fast:
+     - Over 70% of travelers book on phones — your site will look stunning and load in under 1.5 seconds.
+     - Turnkey delivery in 7–10 days with complete staff training.
+
+We've already put together a quick interactive preview mockup designed specifically for ${name}.
+
+Would you be open to a quick 5-minute preview this week?
+
+Best regards,
+Ahmad Raza`;
+
+  document.getElementById('pitchHeading').textContent = `Outreach for ${name}`;
+  document.getElementById('pitchSubject').textContent = subject;
+  document.getElementById('pitchContent').textContent = body;
+
+  let mailto = `mailto:${selectedLead.email || ''}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  document.getElementById('pitchMailto').href = mailto;
+}
+
+function generateReply() {
+  if (!selectedLead) return;
+  let intent = document.getElementById('replyIntentSelect').value;
+  let name = selectedLead.hotel_name || 'your property';
+  let city = selectedLead.city || 'your area';
+  let contact = selectedLead.contact_name || 'there';
+
+  let subject = '';
+  let body = '';
+
+  if (intent === 'price') {
+    subject = `Re: Website & Booking System for ${name} - Pricing & ROI`;
+    body = `Hi ${contact},
+
+Thank you for getting back to me! I'm glad to share our straightforward pricing and how quickly it pays for itself.
+
+To make this completely risk-free and high-return for ${name}, we offer two turnkey packages:
+
+  📦 Package 1: Essential Direct Booking & Reviews Suite
+  - Custom, mobile-responsive hotel website designed around your photos
+  - Zero-commission direct booking engine with instant room reservations
+  - Customer Reviews Engine showcasing verified 5-star traveler testimonials
+  - Direct payment gateway setup (credit cards / UPI / NetBanking / PayPal)
+  - Turnkey delivery in 7–10 days
+  👉 Investment: ₹24,999 INR (or $950 USD one-time)
+
+  🚀 Package 2: Complete Hospitality Growth Suite (Most Popular)
+  - Everything in Package 1, plus:
+  - 2-Way Channel Manager sync (instant calendar sync with Booking.com/Airbnb to prevent double bookings)
+  - Automated guest review collection email/SMS after checkout
+  - Google Business & Local SEO setup so travelers searching "${city} hotels" find you first
+  - 30 days dedicated post-launch support and staff walkthrough
+  👉 Investment: ₹38,999 INR (or $1,450 USD one-time)
+
+💡 The ROI Math for ${name}:
+If an average stay is $150 and OTAs charge 18% commission ($27 per booking), saving just 3 to 4 direct bookings every month recoups your entire investment within 60 days. Every reservation after that is 100% pure profit for ${name}.
+
+Would you like me to send a 3-minute video walkthrough of the booking engine and review showcase, or can we hop on a quick 10-minute call tomorrow?
+
+Best regards,
+Ahmad Raza`;
+  } else if (intent === 'ota_objection') {
+    subject = `Re: Direct Bookings vs OTAs for ${name}`;
+    body = `Hi ${contact},
+
+I completely understand, and it's fantastic that channels like Booking.com / Airbnb are driving solid occupancy for ${name}!
+
+Our system is actually designed to work hand-in-hand with your existing OTAs, not replace them:
+
+1. Capture Repeat Guests at 100% Profit:
+   When guests stay with you once and love your hospitality, they usually search for your hotel directly next season. Without your own direct website, they book through Booking.com again — costing you another 18% to 22% in commissions on someone who is already your loyal customer.
+
+2. Social Proof & Verified Review Showcase:
+   Over 80% of travelers discover a hotel on an OTA, but then Google the hotel's name to see direct photos and customer reviews. Having your own modern website with integrated customer reviews allows you to capture those guests directly before they look at competing hotels.
+
+3. Complete Calendar Sync:
+   Our booking engine syncs automatically with Booking.com and Airbnb calendars via iCal/channel manager, meaning zero double-bookings and zero extra manual work for your staff.
+
+I’d be happy to show you a quick preview of how this works seamlessly without disrupting your current OTA flow. Would you be open to a 5-minute preview link?
+
+Best regards,
+Ahmad Raza`;
+  } else if (intent === 'demo_interest') {
+    subject = `Re: Interactive Demo for ${name} (Direct Booking & Review Engine)`;
+    body = `Hi ${contact},
+
+Fantastic! I’m excited to show you what we've prepared for ${name}.
+
+Here is what we've tailored for you:
+  🏨 Interactive Room Showcase & Direct Reservation Flow
+  ⭐ Customer Review Showcase with verified ratings widget
+  📱 Seamless Mobile Checkout (fast 2-step booking without third-party fees)
+
+I would love to send over the personalized demo preview and walk through how we can have ${name}'s official site live within 7–10 days.
+
+Are you available for a brief 10-minute Zoom / Google Meet or phone call tomorrow at your convenience? Let me know what time works best for you.
+
+Best regards,
+Ahmad Raza`;
+  } else if (intent === 'no_need') {
+    subject = `Re: Online presence for ${name}`;
+    body = `Hi ${contact},
+
+Thank you for your honesty, I really appreciate you letting me know!
+
+Many independent hotel owners initially feel that word-of-mouth or phone bookings are enough. However, today over 78% of travelers look up a hotel online on their phone before visiting, specifically looking for:
+1. Room photos and transparent pricing.
+2. Authentic customer reviews and ratings from past guests.
+3. An instant way to confirm their stay without phone tag.
+
+Without a direct site, many of these high-paying guests end up choosing a nearby competitor in ${city} simply because they could see reviews and book in 30 seconds.
+
+Even a simple 3-page site with direct bookings and customer reviews typically increases direct revenue by 25–40%.
+
+Whenever you're ready to explore this in the future, feel free to keep my details handy. Wishing you and ${name} continued success!
+
+Best regards,
+Ahmad Raza`;
+  } else if (intent === 'contract_ready') {
+    subject = `Website Development Agreement & Next Steps for ${name}`;
+    body = `Hi ${contact},
+
+That is fantastic news! We are thrilled to partner with ${name} to build your high-converting website, zero-commission direct booking engine, and customer reviews showcase.
+
+To get started right away:
+1. I have prepared your official Website Development Agreement attached below (outlining full scope, 7–10 day delivery timeline, and 50/50 milestone payment terms).
+2. Once you review and confirm, we begin design immediately.
+3. We will request your photos, room rates, and check-in policies to complete the build.
+
+Please let me know if you would like any specific adjustments in the agreement, or if you are ready for me to send the digital signing link and invoice!
+
+Best regards,
+Ahmad Raza`;
+  }
+
+  document.getElementById('closerHeading').textContent = `Response for ${name}`;
+  document.getElementById('closerSubject').textContent = subject;
+  document.getElementById('closerContent').textContent = body;
+}
+
+function generateContractView() {
+  if (!selectedLead) return;
+  let name = selectedLead.hotel_name || 'Client Hotel';
+  let contact = selectedLead.contact_name || 'Hotel Owner / General Manager';
+  let city = selectedLead.city || 'Hospitality Location';
+  let currency = document.getElementById('contractCurrency').value;
+  let price = parseFloat(document.getElementById('contractAmount').value) || 28000;
+  let deposit = (price * 0.5).toFixed(2);
+  let balance = (price * 0.5).toFixed(2);
+  let dateStr = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+  let text = `# HOTEL WEBSITE & DIRECT BOOKING SYSTEM DEVELOPMENT AGREEMENT
+
+Agreement Reference: HBD-${selectedLead.id.toUpperCase()}-${new Date().getFullYear()}  
+Effective Date: ${dateStr}  
+
+---
+
+### PARTIES
+1. Developer: Ahmad Raza Web Solutions (Email: ahmadbkj92@gmail.com)
+2. Client: ${name} (Attn: ${contact}, Location: ${city})
+
+---
+
+### 1. PROJECT SCOPE & DELIVERABLES
+Developer agrees to design, build, and deploy a custom hospitality website for Client:
+
+A. Custom Mobile-First Website
+- Modern luxury design optimized for ${name}
+- High-resolution photo gallery & room walkthrough showcase
+- 100% mobile responsive & sub-1.5s load speed
+
+B. Zero-Commission Direct Booking Engine
+- Real-time room reservation engine with date picker & instant confirmation
+- Zero OTA transaction commission (Client keeps 100% room revenue)
+- Secure payment gateway integration (Credit cards / UPI / NetBanking / PayPal)
+
+C. Customer Reviews & Social Proof Engine
+- Verified customer review showcase widget on the homepage
+- TripAdvisor & Google Reviews integration
+- Automated guest review collection system
+
+D. Channel Manager & Availability Sync
+- Two-way calendar synchronization with Airbnb & Booking.com to prevent double-bookings
+
+---
+
+### 2. TIMELINE & MILESTONES
+- Kickoff: Within 24 hours of deposit and receiving property photos
+- Preview & Revision Review: Day 5 to Day 7
+- Final Launch: Completed within 7 to 10 business days
+
+---
+
+### 3. TOTAL INVESTMENT & PAYMENT TERMS
+- Total Project Fee: ${currency} ${price.toLocaleString()}
+- Milestone 1 (Deposit): ${currency} ${parseFloat(deposit).toLocaleString()} (50% due upon signing)
+- Milestone 2 (Final Balance): ${currency} ${parseFloat(balance).toLocaleString()} (50% due upon final approval and domain launch)
+
+---
+
+### 4. POST-LAUNCH WARRANTY
+- 30 Days free technical support, minor tweaks, and complete staff training.
+
+---
+
+SIGNATURES:
+
+Developer: Ahmad Raza                       Client: ___________________________
+Date: ${dateStr}                            Name: ${contact} (${name})`;
+
+  document.getElementById('contractContent').textContent = text;
+}
+
+function quickProceedContract() {
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-contract').classList.add('active');
+  document.querySelectorAll('.nav-tab')[3].classList.add('active');
+}
+
+function openPitchFor(id) {
+  selectLead(id);
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-pitch').classList.add('active');
+  document.querySelectorAll('.nav-tab')[1].classList.add('active');
+}
+
+function openCloserFor(id) {
+  selectLead(id);
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-closer').classList.add('active');
+  document.querySelectorAll('.nav-tab')[2].classList.add('active');
+}
+
+function copyText(elemId) {
+  let text = document.getElementById(elemId).textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    let toast = document.getElementById('toast');
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2000);
+  });
+}
+
+function printContract() {
+  let content = document.getElementById('contractContent').textContent;
+  let win = window.open('', '_blank');
+  win.document.write(`<html><head><title>Contract Agreement - ${selectedLead ? selectedLead.hotel_name : 'Hotel'}</title><style>body{font-family:system-ui,sans-serif;line-height:1.6;padding:40px;max-width:800px;margin:0 auto;color:#111;}pre{white-space:pre-wrap;font-family:inherit;}</style></head><body><pre>${content}</pre></body></html>`);
+  win.document.close();
+  win.print();
+}
+
+function exportCSV() {
+  let rows = [['id', 'hotel_name', 'city', 'outreach_status', 'phone', 'email', 'website', 'audit_notes']];
+  leads.forEach(l => {
+    rows.push([l.id, l.hotel_name, l.city, l.outreach_status, l.phone, l.email, l.website, (l.audit_notes || '').replace(/"/g, '""')]);
+  });
+  let csv = rows.map(r => r.map(v => `"${(v || '').toString().replace(/"/g, '""')}"`).join(',')).join('\n');
+  let blob = new Blob([csv], { type: 'text/csv' });
+  let a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'hotel_leads_export.csv';
+  a.click();
+}
+
+function filterLeadCards(listId, val) {
+  let q = val.toLowerCase();
+  document.querySelectorAll(`#${listId} .lead-card-item`).forEach(card => {
+    let text = card.textContent.toLowerCase();
+    card.style.display = text.includes(q) ? 'block' : 'none';
+  });
+}
+
+function escapeHtml(str) {
+  return (str || '').replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+</script>
+</body>
+</html>
