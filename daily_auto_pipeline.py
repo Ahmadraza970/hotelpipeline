@@ -122,18 +122,24 @@ def strict_verify_and_clean():
     log(f"Strict cleaned {cleaned}, now {len([r for r in rows if r['email'].strip()])}/{len(rows)} with email")
 
 def sync_csv():
-    """Write enriched emails back to CSV so commits reflect actual state."""
+    """Write enriched emails + sent status back to CSV so commits reflect actual state."""
     log("Step 2c: Syncing enriched emails + sent status to CSV")
     rows = list(csv.DictReader(open(CSV, encoding='utf-8')))
     try:
         sent_data = json.load(open(SENT_LOG, encoding='utf-8'))
         sent_ids = {s['id'] for s in sent_data['sent']}
+        # Build lookup: id -> email from sent_log
+        sent_email_map = {s['id']: s['email'] for s in sent_data['sent']}
     except:
         sent_ids = set()
+        sent_email_map = {}
     emails_before = sum(1 for r in rows if r.get('email', '').strip())
     for row in rows:
-        if row['id'] in sent_ids and row.get('status') != 'sent':
+        if row['id'] in sent_ids:
             row['status'] = 'sent'
+            # Copy email from sent_log so CSV reflects what was actually sent
+            if row['id'] in sent_email_map:
+                row['email'] = sent_email_map[row['id']]
     FIELDNAMES = list(rows[0].keys())
     rows.sort(key=lambda x: x['id'])
     with open(CSV, 'w', newline='', encoding='utf-8') as f:
