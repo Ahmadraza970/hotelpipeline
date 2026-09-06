@@ -121,6 +121,28 @@ def strict_verify_and_clean():
         w.writerows([{k:r.get(k,'') for k in FIELDNAMES} for r in rows])
     log(f"Strict cleaned {cleaned}, now {len([r for r in rows if r['email'].strip()])}/{len(rows)} with email")
 
+def sync_csv():
+    """Write enriched emails back to CSV so commits reflect actual state."""
+    log("Step 2c: Syncing enriched emails + sent status to CSV")
+    rows = list(csv.DictReader(open(CSV, encoding='utf-8')))
+    try:
+        sent_data = json.load(open(SENT_LOG, encoding='utf-8'))
+        sent_ids = {s['id'] for s in sent_data['sent']}
+    except:
+        sent_ids = set()
+    emails_before = sum(1 for r in rows if r.get('email', '').strip())
+    for row in rows:
+        if row['id'] in sent_ids and row.get('status') != 'sent':
+            row['status'] = 'sent'
+    FIELDNAMES = list(rows[0].keys())
+    rows.sort(key=lambda x: x['id'])
+    with open(CSV, 'w', newline='', encoding='utf-8') as f:
+        w = csv.DictWriter(f, fieldnames=FIELDNAMES)
+        w.writeheader()
+        w.writerows(rows)
+    emails_after = sum(1 for r in rows if r.get('email', '').strip())
+    log(f"CSV synced: {len(rows)} rows, emails: {emails_before}→{emails_after}, sent marked: {len(sent_ids)}")
+
 def push_to_sheet():
     log(f"Step 3: Pushing to Google Sheet {SHEET_ID} via Sheets API")
     rows=list(csv.DictReader(open(CSV, encoding='utf-8')))
@@ -225,6 +247,8 @@ if __name__=="__main__":
     find_leads()
     serper_enrich()
     strict_verify_and_clean()
+    sync_csv()
     push_to_sheet()
     send_verified()
+    sync_csv()
     log("=== Daily Auto Pipeline END - waiting for replies ===")
