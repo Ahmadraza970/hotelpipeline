@@ -33,6 +33,12 @@ import argparse, json, os, smtplib, sys, time
 from datetime import datetime
 from email.mime.text import MIMEText
 
+try:
+    sys.path.insert(0, os.environ.get("LEADS_HOME", os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+    from telegram_notifier import send_message, load_config as tg_load_config
+except Exception:
+    send_message = tg_load_config = None
+
 if hasattr(sys.stdout, "reconfigure"):
     try:
         sys.stdout.reconfigure(encoding="utf-8")
@@ -186,6 +192,30 @@ def main():
         print("Rendered %d email(s) (dry-run, nothing sent). Use --commit to send." % sent)
     else:
         print("Sent %d email(s). Daily cap is %d." % (sent, cfg.get("daily_limit", 30)))
+
+    # Telegram notification
+    if send_message and tg_load_config:
+        try:
+            tg_cfg = tg_load_config()
+            bot_token = tg_cfg.get('bot_token')
+            chat_id = tg_cfg.get('chat_id')
+            if bot_token and chat_id and sent > 0:
+                mode = "📤 <b>Email Sent</b>" if not args.dry_run else "✏️ <b>Dry-Run Preview</b>"
+                lines = [f"{mode} — {sent} lead(s)"]
+                for lead in leads[:sent]:
+                    name = lead.get('hotel_name','')
+                    city = lead.get('city','')
+                    email = lead.get('email','')
+                    subject, _ = render(lead, cfg)
+                    status = lead.get('outreach_status','identified')
+                    lines.append(f"\n🏨 {name} | {city}")
+                    lines.append(f"📧 {email}")
+                    lines.append(f"📋 {subject}")
+                    lines.append(f"🔹 Status: {status}")
+                text = "\n".join(lines)
+                send_message(bot_token, chat_id, text)
+        except Exception:
+            pass
 
 
 if __name__ == "__main__":

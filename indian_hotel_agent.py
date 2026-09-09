@@ -152,7 +152,7 @@ def load_config():
     return {
         "smtp_host": "smtp.gmail.com",
         "smtp_port": 587,
-        "smtp_user": "ahmadbkj92@gmail.com",
+        "smtp_user": "mithsjames87@gmail.com",
         "smtp_pass": "Ahmad@9835685952",
         "from_name": "Ahmad Raza",
         "daily_limit": 30
@@ -372,7 +372,7 @@ def send_email(lead, cfg):
         city=lead["city"],
         from_name=cfg.get("from_name", "Ahmad Raza"),
         from_phone="+91 9835685952",
-        from_email=cfg.get("smtp_user", "ahmadbkj92@gmail.com")
+        from_email=cfg.get("smtp_user", "mithsjames87@gmail.com")
     )
     lines = text.strip().split("\n")
     subject = lines[0].replace("Subject: ", "")

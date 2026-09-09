@@ -28,16 +28,18 @@ def log(msg):
     print(f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] {msg}")
 
 def find_leads():
-    log("Step 1: Finding leads Pune+Goa via indian_hotel_agent")
+    log("Step 1: Finding leads via indian_hotel_agent" + (" [TURBO: 12 cities]" if os.environ.get('TURBO')=='1' else " Pune+Goa"))
     import subprocess as sp
-    for city, limit in [("Pune", 25), ("Goa", 10)]:
-        sp.run([sys.executable, os.path.join(HERMES_DIR, "indian_hotel_agent.py"), "--city", city, "--limit", str(limit)], timeout=120)
+    cities = [("Pune", 15), ("Goa", 15), ("Manali", 10), ("Jaipur", 10), ("Udaipur", 10), ("Munnar", 10), ("Ooty", 10), ("Rishikesh", 10), ("Varanasi", 10), ("Darjeeling", 10), ("Shimla", 10), ("Lonavala", 10)] if os.environ.get('TURBO')=='1' else [("Pune", 25), ("Goa", 10)]
+    for city, limit in cities:
+        sp.run([sys.executable, os.path.join(HERMES_DIR, "indian_hotel_agent.py"), "--city", city, "--limit", str(limit)], timeout=180)
 
 def serper_enrich():
     log("Step 2: Serper enrich for leads without email")
     import urllib.request, json as js
     rows=list(csv.DictReader(open(CSV, encoding='utf-8')))
-    targets=[r for r in rows if not r['email'].strip()][:20]  # enrich 20 per run to stay within credits
+    limit = 9999 if os.environ.get('TURBO')=='1' else 20
+    targets=[r for r in rows if not r['email'].strip()][:limit]  # enrich limit per run
     if not targets:
         log("No leads need enriching")
         return
@@ -69,7 +71,8 @@ def serper_enrich():
             log(f"Enriched {lead['hotel_name']} -> {email or '-'}")
         except Exception as e:
             log(f"Enrich err {lead['hotel_name']} {e}")
-        time.sleep(1.2)
+        if os.environ.get('TURBO')!='1':
+            time.sleep(1.2)
     # write back
     id_map={r['id']:r for r in targets}
     for r in rows:
@@ -186,7 +189,8 @@ def send_verified():
     candidates=[r for r in rows if r['email'].strip() and r['id'] not in sent_ids]
     # prioritize Goa/Pune, then others
     candidates.sort(key=lambda x: (0 if x['city'].lower() in ('goa','pune') else 1, x['id']))
-    batch=candidates[:20]  # daily limit
+    daily_limit = 9999 if os.environ.get('TURBO')=='1' else 20
+    batch=candidates[:daily_limit]  # daily limit (unlimited in TURBO)
     if not batch:
         log("No verified unsent leads to send, waiting for reply")
         return
@@ -219,7 +223,7 @@ Could I share a 3-minute video preview or demo link with you this week?
 Warm regards,
 Ahmad Raza
 Mobile / WhatsApp: +91 9835685952
-Email: ahmadbkj92@gmail.com
+Email: mithsjames87@gmail.com
 
 P.S. If you prefer not to receive these updates, reply with "Unsubscribe" and I will remove you immediately.
 '''
@@ -233,7 +237,7 @@ P.S. If you prefer not to receive these updates, reply with "Unsubscribe" and I 
         body=template.format(hotel_name=lead['hotel_name'], city=lead['city'])
         msg=MIMEText(body,'plain','utf-8')
         msg['To']=lead['email']
-        msg['From']='Ahmad Raza <ahmadbkj92@gmail.com>'
+        msg['From']='Miths James <mithsjames87@gmail.com>'
         msg['Subject']=subject
         raw=base64.urlsafe_b64encode(msg.as_bytes()).decode()
         try:

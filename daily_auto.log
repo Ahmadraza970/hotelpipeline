@@ -1,0 +1,209 @@
+
+===========================================================================
+🇮🇳 HERMES INDIAN HOTEL LEAD GEN & OUTREACH AGENT (DAILY TARGET: 25)
+===========================================================================
+Mode             : DISCOVERY & PITCH PREVIEW
+Target Output    : C:\Users\AHMAD RAJA\Desktop\hermes\indian_hotel_leads.csv
+Workers          : 5 parallel city scanners
+===========================================================================
+  [→] Scanning Pune...
+  [✓] Pune: 0 candidates found
+
+===========================================================================
+✨ DAILY HARVEST FINISHED: 0 New Leads Added Today
+📁 Total leads in Hermes: C:\Users\AHMAD RAJA\Desktop\hermes\indian_hotel_leads.csv
+===========================================================================
+
+Tip: Run with '--send' to automatically email all qualified leads via SMTP.
+
+===========================================================================
+🇮🇳 HERMES INDIAN HOTEL LEAD GEN & OUTREACH AGENT (DAILY TARGET: 10)
+===========================================================================
+Mode             : DISCOVERY & PITCH PREVIEW
+Target Output    : C:\Users\AHMAD RAJA\Desktop\hermes\indian_hotel_leads.csv
+Workers          : 5 parallel city scanners
+===========================================================================
+  [→] Scanning Goa...
+  [✓] Goa: 0 candidates found
+
+===========================================================================
+✨ DAILY HARVEST FINISHED: 0 New Leads Added Today
+📁 Total leads in Hermes: C:\Users\AHMAD RAJA\Desktop\hermes\indian_hotel_leads.csv
+===========================================================================
+
+Tip: Run with '--send' to automatically email all qualified leads via SMTP.
+
+===========================================================================
+🇮🇳 HERMES INDIAN HOTEL LEAD GEN & OUTREACH AGENT (DAILY TARGET: 25)
+===========================================================================
+Mode             : DISCOVERY & PITCH PREVIEW
+Target Output    : C:\Users\AHMAD RAJA\Desktop\hermes\indian_hotel_leads.csv
+Workers          : 5 parallel city scanners
+===========================================================================
+  [→] Scanning Pune...
+  [✓] Pune: 25 candidates found
+
+===========================================================================
+✨ DAILY HARVEST FINISHED: 0 New Leads Added Today
+📁 Total leads in Hermes: C:\Users\AHMAD RAJA\Desktop\hermes\indian_hotel_leads.csv
+===========================================================================
+
+Hotel Name                       | Location     | Phone            | Status
+-------------------------------------------------------------------------------------
+Sun N Sand                       | Pune         | Not on Maps      | No website (OTA depend
+Sriman                           | Pune         | Not on Maps      | No website (OTA depend
+Sirona                           | Pune         | Not on Maps      | No website (OTA depend
+Aurora Towers                    | Pune         | Not on Maps      | No website (OTA depend
+Raviraj                          | Pune         | Not on Maps      | No website (OTA depend
+Sagar Plaza                      | Pune         | Not on Maps      | No website (OTA depend
+The Gordon House                 | Pune         | Not on Maps      | No website (OTA depend
+MIT School Of Design             | Pune         | Not on Maps      | No website (OTA depend
+P.G.HOSTEL                       | Pune         | Not on Maps      | No website (OTA depend
+Hotel Executive Residency        | Pune         | Not on Maps      | No website (OTA depend
+shitai hotel                     | Pune         | Not on Maps      | No website (OTA depend
+IISER New Hall of Residence      | Pune         | Not on Maps      | No website (OTA depend
+MAE girls hostel                 | Pune         | Not on Maps      | No website (OTA depend
+Sadanand                         | Pune         | Not on Maps      | No website (OTA depend
+Viva Inn                         | Pune         | Not on Maps      | No website (OTA depend
+Ritz Hotel                       | Pune         | Not on Maps      | No website (OTA depend
+Takshashila                      | Pune         | Not on Maps      | No website (OTA depend
+Meghmalhar                       | Pune         | Not on Maps      | No website (OTA depend
+Ganga Bhagyoday                  | Pune         | 02041420000      | No website (OTA depend
+Rahane Arcade                    | Pune         | Not on Maps      | No website (OTA depend
+... and 5 more leads in C:\Users\AHMAD RAJA\Desktop\hermes\indian_hotel_leads.csv
+
+Tip: Run with '--send' to automatically email all qualified leads via SMTP.
+
+===========================================================================
+🇮🇳 HERMES INDIAN HOTEL LEAD GEN & OUTREACH AGENT (DAILY TARGET: 10)
+===========================================================================
+Mode             : DISCOVERY & PITCH PREVIEW
+Target Output    : C:\Users\AHMAD RAJA\Desktop\hermes\indian_hotel_leads.csv
+Workers          : 5 parallel city scanners
+===========================================================================
+  [→] Scanning Goa...
+  [✓] Goa: 0 candidates found
+
+===========================================================================
+✨ DAILY HARVEST FINISHED: 0 New Leads Added Today
+📁 Total leads in Hermes: C:\Users\AHMAD RAJA\Desktop\hermes\indian_hotel_leads.csv
+===========================================================================
+
+Tip: Run with '--send' to automatically email all qualified leads via SMTP.
+[2026-09-06 18:49:41] === Daily Auto Pipeline START ===
+[2026-09-06 18:49:41] Step 1: Finding leads Pune+Goa via indian_hotel_agent
+[2026-09-06 18:50:02] Step 2: Serper enrich for leads without email
+[2026-09-06 18:50:05] Enriched Hotel Paradise Continental -> -
+[2026-09-06 18:50:08] Enriched Bunkotel -> -
+[2026-09-06 18:50:10] Enriched The Cliffe -> info@cliffecottage.com
+[2026-09-06 18:50:13] Enriched Hotel raj palace -> -
+[2026-09-06 18:50:16] Enriched The three oaks boutique hotel -> -
+[2026-09-06 18:50:19] Enriched Vikas Hotel -> -
+[2026-09-06 18:50:23] Enriched FabHotel Clock View -> -
+[2026-09-06 18:50:26] Enriched Hotel Satyaheera -> -
+[2026-09-06 18:50:29] Enriched Urmila Guest House -> -
+[2026-09-06 18:50:32] Enriched Hotel Executive Residency -> -
+[2026-09-06 18:50:35] Enriched Viva Inn -> -
+[2026-09-06 18:50:38] Enriched Chandan Heights -> -
+[2026-09-06 18:50:42] Enriched Swagat Luxury Lodging -> -
+[2026-09-06 18:50:45] Enriched Shreemangal Palace -> -
+[2026-09-06 18:50:47] Enriched Chandrakant Residency A -> -
+[2026-09-06 18:50:50] Enriched Jijai Palace -> -
+[2026-09-06 18:50:53] Enriched Jijai Heights -> -
+[2026-09-06 18:50:58] Enriched Pankaj Society -> -
+[2026-09-06 18:51:03] Enriched Sai Residency -> -
+[2026-09-06 18:51:05] Enriched Jagdamba Apartment -> -
+[2026-09-06 18:51:07] Enriched 1/20
+[2026-09-06 18:51:07] Step 2b: Strict verify (MX via 8.8.8.8, drop bad domains)
+[2026-09-06 18:51:22] Cleaning in-lead-016 info@cliffecottage.com (no MX)
+[2026-09-06 18:51:25] Cleaning in-lead-034 contact@hotelgreenparkgoa.com (known bad)
+[2026-09-06 18:51:27] Cleaning in-lead-043 contact@gtdchotel.com (known bad)
+[2026-09-06 18:51:31] Cleaning in-lead-059 reservations@sunnsandpune.com (no MX)
+[2026-09-06 18:51:36] Cleaning in-lead-091 contactus@commonfloor.com (known bad)
+[2026-09-06 18:51:36] Cleaning in-lead-093 contactus@commonfloor.com (known bad)
+[2026-09-06 18:51:37] Cleaning in-lead-097 contactus@commonfloor.com (known bad)
+[2026-09-06 18:51:37] Strict cleaned 7, now 73/108 with email
+[2026-09-06 18:51:37] Step 2c: Syncing enriched emails + sent status to CSV
+Traceback (most recent call last):
+  File "C:\Users\AHMAD RAJA\Desktop\hermes\daily_auto_pipeline.py", line 247, in <module>
+    sync_csv()
+    ~~~~~~~~^^
+  File "C:\Users\AHMAD RAJA\Desktop\hermes\daily_auto_pipeline.py", line 150, in sync_csv
+    log(f"CSV synced: {len(rows)} rows, emails: {emails_before}\u2192{emails_after}, sent marked: {len(sent_ids)}")
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AHMAD RAJA\Desktop\hermes\daily_auto_pipeline.py", line 28, in log
+    print(f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] {msg}")
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AHMAD RAJA\AppData\Local\Python\pythoncore-3.14-64\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u2192' in position 54: character maps to <undefined>
+
+===========================================================================
+🇮🇳 HERMES INDIAN HOTEL LEAD GEN & OUTREACH AGENT (DAILY TARGET: 25)
+===========================================================================
+Mode             : DISCOVERY & PITCH PREVIEW
+Target Output    : C:\Users\AHMAD RAJA\Desktop\hermes\indian_hotel_leads.csv
+Workers          : 5 parallel city scanners
+===========================================================================
+  [→] Scanning Pune...
+  [✓] Pune: 0 candidates found
+
+===========================================================================
+✨ DAILY HARVEST FINISHED: 0 New Leads Added Today
+📁 Total leads in Hermes: C:\Users\AHMAD RAJA\Desktop\hermes\indian_hotel_leads.csv
+===========================================================================
+
+Tip: Run with '--send' to automatically email all qualified leads via SMTP.
+
+===========================================================================
+🇮🇳 HERMES INDIAN HOTEL LEAD GEN & OUTREACH AGENT (DAILY TARGET: 10)
+===========================================================================
+Mode             : DISCOVERY & PITCH PREVIEW
+Target Output    : C:\Users\AHMAD RAJA\Desktop\hermes\indian_hotel_leads.csv
+Workers          : 5 parallel city scanners
+===========================================================================
+  [→] Scanning Goa...
+  [✓] Goa: 0 candidates found
+
+===========================================================================
+✨ DAILY HARVEST FINISHED: 0 New Leads Added Today
+📁 Total leads in Hermes: C:\Users\AHMAD RAJA\Desktop\hermes\indian_hotel_leads.csv
+===========================================================================
+
+Tip: Run with '--send' to automatically email all qualified leads via SMTP.
+^C^C^C
+===========================================================================
+🇮🇳 HERMES INDIAN HOTEL LEAD GEN & OUTREACH AGENT (DAILY TARGET: 25)
+===========================================================================
+Mode             : DISCOVERY & PITCH PREVIEW
+Target Output    : C:\Users\AHMAD RAJA\Desktop\hermes\indian_hotel_leads.csv
+Workers          : 5 parallel city scanners
+===========================================================================
+  [→] Scanning Pune...
+  [✓] Pune: 0 candidates found
+
+===========================================================================
+✨ DAILY HARVEST FINISHED: 0 New Leads Added Today
+📁 Total leads in Hermes: C:\Users\AHMAD RAJA\Desktop\hermes\indian_hotel_leads.csv
+===========================================================================
+
+Tip: Run with '--send' to automatically email all qualified leads via SMTP.
+
+===========================================================================
+🇮🇳 HERMES INDIAN HOTEL LEAD GEN & OUTREACH AGENT (DAILY TARGET: 10)
+===========================================================================
+Mode             : DISCOVERY & PITCH PREVIEW
+Target Output    : C:\Users\AHMAD RAJA\Desktop\hermes\indian_hotel_leads.csv
+Workers          : 5 parallel city scanners
+===========================================================================
+  [→] Scanning Goa...
+  [✓] Goa: 0 candidates found
+
+===========================================================================
+✨ DAILY HARVEST FINISHED: 0 New Leads Added Today
+📁 Total leads in Hermes: C:\Users\AHMAD RAJA\Desktop\hermes\indian_hotel_leads.csv
+===========================================================================
+
+Tip: Run with '--send' to automatically email all qualified leads via SMTP.
+^C^C^C^C^C

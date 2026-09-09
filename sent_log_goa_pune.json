@@ -339,6 +339,486 @@
       "id": "in-lead-033",
       "hotel": "Shivalik Hills",
       "email": "booking@rchronline.com"
+    },
+    {
+      "id": "in-lead-044",
+      "hotel": "Hotel A Canoa",
+      "email": "hm@advanihotels.com"
+    },
+    {
+      "id": "in-lead-066",
+      "hotel": "MIT School Of Design",
+      "email": "admissions.mitid@mituniversity.edu.in"
+    },
+    {
+      "id": "in-lead-070",
+      "hotel": "IISER New Hall of Residence",
+      "email": "admissions@iiserpune.ac.in"
+    },
+    {
+      "id": "in-lead-071",
+      "hotel": "MAE girls hostel",
+      "email": "enquiry@vidyaniketanhostels.com"
+    },
+    {
+      "id": "in-lead-014",
+      "hotel": "Prospect Point Lodge",
+      "email": "info@prospectpt.com"
+    },
+    {
+      "id": "in-lead-023",
+      "hotel": "Hotel Paramount",
+      "email": "info@paramounthotels.com"
+    },
+    {
+      "id": "in-lead-027",
+      "hotel": "Narmada Hostel",
+      "email": "hari@gmail.com"
+    },
+    {
+      "id": "in-lead-004",
+      "hotel": "Sandringham Hideout",
+      "email": "support@scantrip.com"
+    },
+    {
+      "id": "in-lead-076",
+      "hotel": "Meghmalhar",
+      "email": "meghmalhartourism@gmail.com"
+    },
+    {
+      "id": "in-lead-087",
+      "hotel": "Bhalchandra",
+      "email": "sales@jfe-eng.co.in"
+    },
+    {
+      "id": "in-lead-092",
+      "hotel": "Dnyaneshwari Niwas",
+      "email": "agency2050@gmail.com"
+    },
+    {
+      "id": "in-lead-082",
+      "hotel": "Chandrakant Residency A",
+      "email": "chandrakantpatil0796@gmail.com"
+    },
+    {
+      "id": "in-lead-086",
+      "hotel": "Pankaj Society",
+      "email": "info@pankajdevelopers.com"
+    },
+    {
+      "id": "in-lead-106",
+      "hotel": "Marriott Suites Pune",
+      "email": "mhrs.pnqms.reservation@marriotthotels.com"
+    },
+    {
+      "id": "in-lead-107",
+      "hotel": "DRDO Diat Guest House ",
+      "email": "a@diat.ac.in"
+    },
+    {
+      "id": "in-lead-108",
+      "hotel": "cloud 9",
+      "email": "info@cloudninecare.com"
+    },
+    {
+      "id": "in-lead-109",
+      "hotel": "Cottage Cold Corner",
+      "email": "cottagecoldcorner@gmail.com"
+    },
+    {
+      "id": "in-lead-115",
+      "hotel": "Sonam Guest House",
+      "email": "support@scantrip.com"
+    },
+    {
+      "id": "in-lead-116",
+      "hotel": "Ambika",
+      "email": "ambikahotelmanali@gmail.com"
+    },
+    {
+      "id": "in-lead-120",
+      "hotel": "Blue Heaven",
+      "email": "b2bratesankittravelstories@gmail.com"
+    },
+    {
+      "id": "in-lead-123",
+      "hotel": "Chandra Bhaga",
+      "email": "keylong@hptdc.in"
+    },
+    {
+      "id": "in-lead-124",
+      "hotel": "Chelsea",
+      "email": "atn@pcgosaka.org"
+    },
+    {
+      "id": "in-lead-128",
+      "hotel": "Dragon",
+      "email": "support@dragonhilllodge.zendesk.com"
+    },
+    {
+      "id": "in-lead-129",
+      "hotel": "Dribu",
+      "email": "support@triplihotels.com"
+    },
+    {
+      "id": "in-lead-130",
+      "hotel": "Dulbul",
+      "email": "info@ehimachal.org"
+    },
+    {
+      "id": "in-lead-131",
+      "hotel": "Gandhra",
+      "email": "reservations@itchotels.com"
+    },
+    {
+      "id": "in-lead-132",
+      "hotel": "Gaurav",
+      "email": "aj@yahoo.com"
+    },
+    {
+      "id": "in-lead-133",
+      "hotel": "Holiday Inn",
+      "email": "reservation@holidayinnjaipur.in"
+    },
+    {
+      "id": "in-lead-135",
+      "hotel": "The Oberoi  Rajvilas",
+      "email": "reservations@oberoigroup.com"
+    },
+    {
+      "id": "in-lead-136",
+      "hotel": "Royal Guest House",
+      "email": "stay@raashotels.com"
+    },
+    {
+      "id": "in-lead-137",
+      "hotel": "Shahpura House",
+      "email": "reservations@shahpura.com"
+    },
+    {
+      "id": "in-lead-138",
+      "hotel": "Park Ocean",
+      "email": "reservation@hotelparkocean.com"
+    },
+    {
+      "id": "in-lead-139",
+      "hotel": "Dera Rawatsar - Heritage Hotel",
+      "email": "service@derarawatsar.com"
+    },
+    {
+      "id": "in-lead-140",
+      "hotel": "Pearl Palace Hotel",
+      "email": "reservationhpp@gmail.com"
+    },
+    {
+      "id": "in-lead-141",
+      "hotel": "Jaipur Inn",
+      "email": "reservation@holidayinnjaipur.in"
+    },
+    {
+      "id": "in-lead-143",
+      "hotel": "Devraj Niwas - Boutique Hotel",
+      "email": "devrajniwasudaipur@gmail.com"
+    },
+    {
+      "id": "in-lead-099",
+      "hotel": "Vitthal Complex",
+      "email": "support@beyondwalls.com"
+    },
+    {
+      "id": "in-lead-144",
+      "hotel": "Alsisar's Haveli",
+      "email": "alsisar@alsisar.com"
+    },
+    {
+      "id": "in-lead-145",
+      "hotel": "Hotel Om Tower",
+      "email": "info@hotelomtower.com"
+    },
+    {
+      "id": "in-lead-146",
+      "hotel": "Ever Green",
+      "email": "sjain@evergreengroups.com"
+    },
+    {
+      "id": "in-lead-147",
+      "hotel": "Akriti",
+      "email": "info@akratijewelsinc.com"
+    },
+    {
+      "id": "in-lead-148",
+      "hotel": "Hari Mahal Palace",
+      "email": "info@pachargrouphotels.com"
+    },
+    {
+      "id": "in-lead-149",
+      "hotel": "CLMM Hotel",
+      "email": "jai.reservations@fairmont.com"
+    },
+    {
+      "id": "in-lead-150",
+      "hotel": "Bissau Palace Hotel",
+      "email": "reserve@bissaupalace.com"
+    },
+    {
+      "id": "in-lead-151",
+      "hotel": "Royal orchid",
+      "email": "gm.hroj@royalorchidhotels.com"
+    },
+    {
+      "id": "in-lead-153",
+      "hotel": "Jai Mangal Palace",
+      "email": "mangal35@yahoo.co.in"
+    },
+    {
+      "id": "in-lead-154",
+      "hotel": "Hotel Shalimar",
+      "email": "gaurav@hotel-shalimar.com"
+    },
+    {
+      "id": "in-lead-155",
+      "hotel": "Moustache",
+      "email": "connect@moustachescapes.com"
+    },
+    {
+      "id": "in-lead-157",
+      "hotel": "Golden Manor",
+      "email": "gm@goldenmanorjaipur.com"
+    },
+    {
+      "id": "in-lead-158",
+      "hotel": "Taj Lake Palace",
+      "email": "lakepalace.udaipur@tajhotels.com"
+    },
+    {
+      "id": "in-lead-159",
+      "hotel": "Hilltop Palace Hotel",
+      "email": "hilltoppalacehotel@gmail.com"
+    },
+    {
+      "id": "in-lead-160",
+      "hotel": "The Leela Palace Kempinski Udaipur",
+      "email": "reservations@theleela.com"
+    },
+    {
+      "id": "in-lead-161",
+      "hotel": "The Oberoi Udaivilas",
+      "email": "reservations@oberoigroup.com"
+    },
+    {
+      "id": "in-lead-162",
+      "hotel": "Hotel Udaigarh",
+      "email": "mail@udaigarh.com"
+    },
+    {
+      "id": "in-lead-163",
+      "hotel": "Dream Heaven",
+      "email": "restaurant1359henx@gmail.com"
+    },
+    {
+      "id": "in-lead-164",
+      "hotel": "Ishwar Palace",
+      "email": "aniszaidi64@gmail.com"
+    },
+    {
+      "id": "in-lead-016",
+      "hotel": "The Cliffe",
+      "email": "info@cliffecottage.com"
+    },
+    {
+      "id": "in-lead-166",
+      "hotel": "Hotel Trident",
+      "email": "reservations@tridenthotels.com"
+    },
+    {
+      "id": "in-lead-167",
+      "hotel": "Fatehgarh Hotel",
+      "email": "fatehgarh@fatehcollection.com"
+    },
+    {
+      "id": "in-lead-168",
+      "hotel": "Lake View",
+      "email": "crslakeviewhotel@gmail.com"
+    },
+    {
+      "id": "in-lead-169",
+      "hotel": "Atiti",
+      "email": "reservations@oberoigroup.com"
+    },
+    {
+      "id": "in-lead-170",
+      "hotel": "Luxury Palace",
+      "email": "reservations.aravali@tajhotels.com"
+    },
+    {
+      "id": "in-lead-172",
+      "hotel": "Raj Palace",
+      "email": "reservations@rajpalace.in"
+    },
+    {
+      "id": "in-lead-174",
+      "hotel": "Hotel Amet Haveli",
+      "email": "mail@amethaveliudaipur.com"
+    },
+    {
+      "id": "in-lead-176",
+      "hotel": "Aranya Kutir",
+      "email": "info@mertiahospitality.com"
+    },
+    {
+      "id": "in-lead-177",
+      "hotel": "Kankarwar Haweli",
+      "email": "info@kankarwahaveli.com"
+    },
+    {
+      "id": "in-lead-178",
+      "hotel": "Pushkar Palace Guest House",
+      "email": "gm@bhanwarsinghpalace.com"
+    },
+    {
+      "id": "in-lead-179",
+      "hotel": "Jaiwana Haveli",
+      "email": "info@jaiwanahaveli.com"
+    },
+    {
+      "id": "in-lead-180",
+      "hotel": "Hanuman Ghat Hotel - Jungle sturmfrei",
+      "email": "care@easemytrip.com"
+    },
+    {
+      "id": "in-lead-182",
+      "hotel": "Jag niwas",
+      "email": "mail@jagatniwaspalace.com"
+    },
+    {
+      "id": "in-lead-183",
+      "hotel": "JJ Cottages",
+      "email": "jjcottagemnr@gmail.com"
+    },
+    {
+      "id": "in-lead-184",
+      "hotel": "Copper Castle",
+      "email": "reservations@abadhotels.com"
+    },
+    {
+      "id": "in-lead-188",
+      "hotel": "Arfa Tourist Home",
+      "email": "aidatouristhomemnr@gmail.com"
+    },
+    {
+      "id": "in-lead-189",
+      "hotel": "Royal Retreat",
+      "email": "royalretreatmunnar@gmail.com"
+    },
+    {
+      "id": "in-lead-191",
+      "hotel": "Safa Lodge",
+      "email": "safamunnar@gmail.com"
+    },
+    {
+      "id": "in-lead-193",
+      "hotel": "Hotel Almaaeda",
+      "email": "hotelalamedahighline@gmail.com"
+    },
+    {
+      "id": "in-lead-194",
+      "hotel": "Saravana Inn",
+      "email": "saravanabhavan.munnar@gmail.com"
+    },
+    {
+      "id": "in-lead-197",
+      "hotel": "Aida Tourist Home",
+      "email": "aidatouristhomemnr@gmail.com"
+    },
+    {
+      "id": "in-lead-198",
+      "hotel": "Clouds Valley",
+      "email": "reservation@cloudsvalley.com"
+    },
+    {
+      "id": "in-lead-199",
+      "hotel": "Kanan Devan Hills Club",
+      "email": "munnar.kdhclub@gmail.com"
+    },
+    {
+      "id": "in-lead-200",
+      "hotel": "Poopada",
+      "email": "poopada@rediffmail.com"
+    },
+    {
+      "id": "in-lead-202",
+      "hotel": "Silver Tips",
+      "email": "gm@silvertipsmunnar.com"
+    },
+    {
+      "id": "in-lead-203",
+      "hotel": "Blackberry Hills",
+      "email": "reservations@blackberryresorts.com"
+    },
+    {
+      "id": "in-lead-204",
+      "hotel": "Deshadan Mountain Resort",
+      "email": "sales@swisscounty.com"
+    },
+    {
+      "id": "in-lead-205",
+      "hotel": "7's TM Cottage",
+      "email": "booking@kamaraa.com"
+    },
+    {
+      "id": "in-lead-206",
+      "hotel": "Grand Plaza",
+      "email": "info@grandplazamunnar.com"
+    },
+    {
+      "id": "in-lead-208",
+      "hotel": "Savoy Hotel",
+      "email": "reservations@ihcltata.com"
+    },
+    {
+      "id": "in-lead-209",
+      "hotel": "Kings Cliffe",
+      "email": "bookings@littlearth.in"
+    },
+    {
+      "id": "in-lead-210",
+      "hotel": "Sullivan Court",
+      "email": "reservations@itchotels.com"
+    },
+    {
+      "id": "in-lead-213",
+      "hotel": "Hotel TamilNadu _ ooty",
+      "email": "info@yatradham.org"
+    },
+    {
+      "id": "in-lead-214",
+      "hotel": "Sterling Resorts Elkhill",
+      "email": "info.resorts@sterlingholidays.com"
+    },
+    {
+      "id": "in-lead-215",
+      "hotel": "Hotel Nahar",
+      "email": "mail@naharhotels.com"
+    },
+    {
+      "id": "in-lead-218",
+      "hotel": "Darshan",
+      "email": "hoteldarshan@yahoo.co.in"
+    },
+    {
+      "id": "in-lead-219",
+      "hotel": "Monarch",
+      "email": "monarchooty@gmail.com"
+    },
+    {
+      "id": "in-lead-220",
+      "hotel": "Charing Cross",
+      "email": "mail@naharhotels.com"
+    },
+    {
+      "id": "in-lead-222",
+      "hotel": "Preethi Palace",
+      "email": "preethipalace@gmail.com"
     }
   ],
   "failed": []
