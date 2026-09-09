@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+client_secret*.json
+google_token.json
+oauth_flow.pkl
+*.log
+nul
+identified_leads_*.csv
+.env
