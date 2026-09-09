@@ -1,8 +1,8 @@
 import csv, json, re, os, urllib.request, urllib.parse, time
 from datetime import datetime
-SERPER_KEY=os.environ.get("SERPER_KEY","d0f391c08934a027ae79ef736de987af6a16de36")
-HERMES_DIR=r"C:/Users/AHMAD RAJA/Desktop/hermes"
-CSV=os.path.join(HERMES_DIR,"indian_hotel_leads.csv")
+HERMES_DIR = os.environ.get("HERMES_DIR", os.path.expanduser("~"))
+CSV = os.path.join(HERMES_DIR, "indian_hotel_leads.csv")
+SERPER_KEY = os.environ.get("SERPER_KEY", "d0f391c08934a027ae79ef736de987af6a16de36")
 USA_CITIES=["New York","Miami","Los Angeles","Las Vegas","Orlando","Austin","Seattle","Denver"]
 def s_search(q):
     d=json.dumps({"q":q,"num":10}).encode()

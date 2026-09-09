@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 
-HERMES_DIR = r"C:/Users/AHMAD RAJA/Desktop/hermes"
+HERMES_DIR = os.environ.get("HERMES_DIR", os.path.expanduser("~"))
 CSV = os.path.join(HERMES_DIR, "indian_hotel_leads.csv")
 SENT_LOG = os.path.join(HERMES_DIR, "sent_log_goa_pune.json")
 TOKEN = os.path.join(HERMES_DIR, "google_token.json")

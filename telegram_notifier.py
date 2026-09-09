@@ -1,11 +1,27 @@
 #!/usr/bin/env python3
 """
 HERMES Telegram Notifier — sends updates to Telegram via Bot API.
+Cross-platform: auto-detects OS (Windows/Linux/Android-Termux).
 """
 import json, os, requests
 from datetime import datetime
 
-CONFIG_FILE = r"C:/Users/AHMAD RAJA/Desktop/hermes/telegram_config.json"
+def _hermes_dir():
+    """Auto-detect the Hermes working directory cross-platform."""
+    env = os.environ.get("HERMES_DIR")
+    if env:
+        return env
+    # Android/Termux
+    if os.path.exists("/data/data/com.termux/files/home/hermes"):
+        return "/data/data/com.termux/files/home/hermes"
+    # Linux
+    if os.path.exists(os.path.expanduser("~/hermes")):
+        return os.path.expanduser("~/hermes")
+    # Windows fallback
+    return os.path.expanduser("~")
+
+HERMES_DIR = _hermes_dir()
+CONFIG_FILE = os.path.join(HERMES_DIR, "telegram_config.json")
 
 def load_config():
     if os.path.exists(CONFIG_FILE):
@@ -36,8 +52,10 @@ def format_lead_stats():
     """Get current pipeline stats."""
     try:
         import csv, json
-        csv_leads = list(csv.DictReader(open(r'C:/Users/AHMAD RAJA/Desktop/hermes/indian_hotel_leads.csv', encoding='utf-8')))
-        sent = json.load(open(r'C:/Users/AHMAD RAJA/Desktop/hermes/sent_log_goa_pune.json'))
+        csv_path = os.path.join(HERMES_DIR, "indian_hotel_leads.csv")
+        sent_path = os.path.join(HERMES_DIR, "sent_log_goa_pune.json")
+        csv_leads = list(csv.DictReader(open(csv_path, encoding='utf-8', errors='ignore')))
+        sent = json.load(open(sent_path)) if os.path.exists(sent_path) else {'sent': []}
         
         total = len(csv_leads)
         india = len([r for r in csv_leads if not (r.get('Lead ID','').startswith('us-') or r.get('id','').startswith('us-') or r.get('Lead ID','').startswith('us-serper'))])

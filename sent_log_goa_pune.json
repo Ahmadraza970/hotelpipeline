@@ -889,6 +889,21 @@
       "id": "us-serper-0125",
       "hotel": "Las Vegas Hotel Reservations",
       "email": "frontdesk@serenevegas.com"
+    },
+    {
+      "id": "us-serper-0111",
+      "hotel": "Contact Information",
+      "email": "FiftyFD@sonesta.com"
+    },
+    {
+      "id": "us-serper-0123",
+      "hotel": "Contact Us Today",
+      "email": "frontdesk@hoteltrouvail.com"
+    },
+    {
+      "id": "us-serper-0124",
+      "hotel": "Contact Us",
+      "email": "stay@slh.com"
     }
   ],
   "failed": []

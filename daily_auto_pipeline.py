@@ -22,7 +22,7 @@ CSV = os.path.join(HERMES_DIR, "indian_hotel_leads.csv")
 SHEET_ID = os.environ.get("SHEET_ID", "1wt74LQbaVKT4um2Auv92lJDWF0lKj7_JejnrRBi26cY")
 SENT_LOG = os.path.join(HERMES_DIR, "sent_log_goa_pune.json")
 SERPER_KEY = os.environ.get("SERPER_KEY", "d0f391c08934a027ae79ef736de987af6a16de36")
-GOOGLE_TOKEN = os.environ.get("GOOGLE_TOKEN", "C:/Users/AHMAD RAJA/AppData/Local/hermes/google_token.json")
+GOOGLE_TOKEN = os.environ.get("GOOGLE_TOKEN", os.path.join(HERMES_DIR, "google_token.json"))
 
 def log(msg):
     print(f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] {msg}")
